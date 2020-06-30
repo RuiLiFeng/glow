@@ -416,7 +416,7 @@ def revnet2d_step(name, z, logdet, hps, reverse, randomize_noise=True, noise_inp
 
         with tf.variable_scope('noise'):
             if randomize_noise:
-                noise = tf.random_normal(Z.int_shape(z)[:-1]+[1], dtype=z.dtype)
+                noise = tf.random_normal([1] + Z.int_shape(z)[1:-1]+[1], dtype=z.dtype)
             else:
                 noise = tf.cast(noise_inputs[layer_idx], z.dtype)
             noise_strength = tf.get_variable('noise_strength', shape=[], initializer=tf.initializers.zeros())
